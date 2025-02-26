@@ -38,9 +38,9 @@ class CRUDApp:
 
         #Botoes do CRUD
         tk.Button(self.root,text="Criar Usuario",command=self.create_user).grid(row=6,column=0,columnspan=1)
-        tk.Button(self.root,text="Listar Usuario",command=self.create_user).grid(row=6,column=1,columnspan=1)
-        tk.Button(self.root,text="Alterar Usuario",command=self.create_user).grid(row=7,column=0,columnspan=1)
-        tk.Button(self.root,text="Excluir Usuario",command=self.create_user).grid(row=7,column=1,columnspan=1)
+        tk.Button(self.root,text="Listar Usuario",command=self.read_users).grid(row=6,column=1,columnspan=1)
+        tk.Button(self.root,text="Alterar Usuario",command=self.update_user).grid(row=7,column=0,columnspan=1)
+        tk.Button(self.root,text="Excluir Usuario",command=self.delete_user).grid(row=7,column=1,columnspan=1)
 
     def create_user(self):
         nome = self.nome_entry.get()
@@ -58,7 +58,7 @@ class CRUDApp:
             self.senha_entry.delete(0,tk.END)
             messagebox.showerror("Success","Usuario criado com sucesso")
         else:
-            messagebox.showerror("Eroor","Todos os campos são obrigatórios")
+            messagebox.showerror("Error","Todos os campos são obrigatórios")
     def read_users(self):
         users =read_users()
         self.text_area.delete(1.0,tk.END)
@@ -82,4 +82,18 @@ class CRUDApp:
             self.senha_entry.delete(0,tk.END)
             messagebox.showerror("Success","Usuario alterado com sucesso")
         else:
-            messagebox.showerror("Eroor","Todos os campos são obrigatórios")
+            messagebox.showerror("Error","Todos os campos são obrigatórios")
+
+    def delete_user(self):
+        user_id = self.user_id_entry.get()
+        if user_id:
+            delete_user(user_id)
+            self.user_id_entry.delete(0,tk.END)
+            messagebox.showerror("Success","Usuario excluido com sucesso!")
+        else:
+            messagebox.showerror("Error","ID do usuario é obrigatorio")
+    
+if __name__=="__main__":
+    root = tk.Tk()
+    app = CRUDApp(root)
+    root.mainloop()
