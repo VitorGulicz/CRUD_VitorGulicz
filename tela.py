@@ -41,6 +41,9 @@ class CRUDApp:
         tk.Button(self.root,text="Listar Usuario",command=self.read_users).grid(row=6,column=1,columnspan=1)
         tk.Button(self.root,text="Alterar Usuario",command=self.update_user).grid(row=7,column=0,columnspan=1)
         tk.Button(self.root,text="Excluir Usuario",command=self.delete_user).grid(row=7,column=1,columnspan=1)
+        
+        self.text_area = tk.Text(self.root,height=10,width=80)
+        self.text_area.grid(row=10,column=0,columnspan=4)
 
     def create_user(self):
         nome = self.nome_entry.get()
@@ -64,7 +67,7 @@ class CRUDApp:
         self.text_area.delete(1.0,tk.END)
         for user in users:
             self.text_area.insert(tk.END,f"ID: {user[0]}, Nome: {user[1]}, Telefone: {user[2]}, Email: {user[3]}\n")
-
+            
     def update_user(self):
         user_id = self.user_id_entry.get()
         nome = self.nome_entry.get()
