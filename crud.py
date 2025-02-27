@@ -40,7 +40,7 @@ def delete_user(user_id):
     conn = get_connection()
     cursor=conn.cursor()
     querry = "DELETE FROM usuario WHERE idusuario = %s"
-    cursor.execute(querry,(user_id))
+    cursor.execute(querry,(user_id,))
     conn.commit()
     cursor.close()
     conn.close()
